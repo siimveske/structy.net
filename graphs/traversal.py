@@ -20,15 +20,6 @@ def dfs(graph, start):
     return path
 
 
-def dfs_rec(graph, start, path=[]):
-
-    path += [start]
-    for node in graph[start]:
-        dfs_rec(graph, node, path)
-
-    return path
-
-
 def bfs(graph, start):
     path = []
     queue = deque([start])
@@ -36,6 +27,15 @@ def bfs(graph, start):
         node = queue.popleft()
         path.append(node)
         queue += graph[node]
+    return path
+
+
+def dfs_rec(graph, start, path=[]):
+
+    path += [start]
+    for node in graph[start]:
+        dfs_rec(graph, node, path)
+
     return path
 
 
