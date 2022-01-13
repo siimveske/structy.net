@@ -3,35 +3,6 @@ https://structy.net/problems/island-count
 https://www.youtube.com/watch?v=tWVWeAqZ0WU&t=5976s
 '''
 
-grid1 = [
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'W'],
-    ['W', 'W', 'L', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['L', 'L', 'W', 'W', 'W'],
-]
-
-grid2 = [
-    ['L', 'W', 'W', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['W', 'L', 'W', 'L', 'W'],
-    ['W', 'W', 'W', 'W', 'W'],
-    ['W', 'W', 'L', 'L', 'L'],
-]
-
-grid3 = [
-    ['L', 'L', 'L'],
-    ['L', 'L', 'L'],
-    ['L', 'L', 'L'],
-]
-
-grid4 = [
-    ['W', 'W'],
-    ['W', 'W'],
-    ['W', 'W'],
-]
-
 
 def explore(grid, row, col, visited):
     rowInbound = 0 <= row < len(grid)
@@ -66,15 +37,37 @@ def island_count(grid):
 
 
 if __name__ == '__main__':
+    grid = [
+        ['W', 'L', 'W', 'W', 'W'],
+        ['W', 'L', 'W', 'W', 'W'],
+        ['W', 'W', 'W', 'L', 'W'],
+        ['W', 'W', 'L', 'L', 'W'],
+        ['L', 'W', 'W', 'L', 'L'],
+        ['L', 'L', 'W', 'W', 'W'],
+    ]
+    assert island_count(grid) == 3
 
-    assert islandCount(grid1) == 3
-    assert islandCount(grid2) == 4
-    assert islandCount(grid3) == 1
-    assert islandCount(grid4) == 0
+    grid = [
+        ['L', 'W', 'W', 'L', 'W'],
+        ['L', 'W', 'W', 'L', 'L'],
+        ['W', 'L', 'W', 'L', 'W'],
+        ['W', 'W', 'W', 'W', 'W'],
+        ['W', 'W', 'L', 'L', 'L'],
+    ]
+    assert island_count(grid) == 4
 
-    assert island_count(grid1) == 3
-    assert island_count(grid2) == 4
-    assert island_count(grid3) == 1
-    assert island_count(grid4) == 0
+    grid = [
+        ['L', 'L', 'L'],
+        ['L', 'L', 'L'],
+        ['L', 'L', 'L'],
+    ]
+    assert island_count(grid) == 1
+
+    grid = [
+        ['W', 'W'],
+        ['W', 'W'],
+        ['W', 'W'],
+    ]
+    assert island_count(grid) == 0
 
     print('OK')
