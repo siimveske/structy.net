@@ -3,6 +3,7 @@ from node import Node
 
 
 def depth_first_values(root: Node):
+    '''Find btree values iteratively'''
     if root is None:
         return []
 
@@ -21,6 +22,7 @@ def depth_first_values(root: Node):
 
 
 def rdepth_first_values(root: Node):
+    '''Find btree values recursively'''
     if root is None:
         return []
 
