@@ -8,13 +8,14 @@ def depth_first_values(root: Node):
 
     values = []
     stack = [root]
+
     while stack:
-        item = stack.pop()
-        values.append(item.val)
-        if item.right:
-            stack.append(item.right)
-        if item.left:
-            stack.append(item.left)
+        node = stack.pop()
+        values.append(node.val)
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
 
     return values
 
