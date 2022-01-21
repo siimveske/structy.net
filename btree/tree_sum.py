@@ -26,10 +26,7 @@ def rtree_sum(root: Node):
     if root is None:
         return 0
 
-    total = root.val
-
-    total += rtree_sum(root.left)
-    total += rtree_sum(root.right)
+    total = root.val + rtree_sum(root.left) + rtree_sum(root.right)
 
     return total
 
