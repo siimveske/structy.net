@@ -6,8 +6,8 @@ def tree_min_value(root: Node):
     """Return the minimum value within the tree
     (iterative depth first solution)"""
 
-    if root is None:
-        return False
+    if not root:
+        return float("inf")
 
     stack = [root]
     minimum = float("inf")
@@ -28,7 +28,7 @@ def rtree_min_value(root: Node):
     """return the minimum value within the tree
     (recursive depth first solution)"""
 
-    if root is None:
+    if not root:
         return float("inf")
 
     return min([root.val, rtree_min_value(root.left), rtree_min_value(root.right)])
