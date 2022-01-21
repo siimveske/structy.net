@@ -22,7 +22,7 @@ def tree_sum(root: Node):
 
 
 def rtree_sum(root: Node):
-    """Find btree values recursively"""
+    """Find sum of btree values recursively (depth first solution)"""
     if root is None:
         return 0
 
