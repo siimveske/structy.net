@@ -26,7 +26,7 @@ def rdepth_first_values(root: Node):
     lvalues = rdepth_first_values(root.left)
     rvalues = rdepth_first_values(root.right)
 
-    return [root, *lvalues, *rvalues]
+    return [root.val, *lvalues, *rvalues]
 
 
 class Test(unittest.TestCase):
@@ -112,92 +112,87 @@ class Test(unittest.TestCase):
         values = depth_first_values(None)
         assert values == []
 
+    def test_05(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
 
-def test_05(self):
-    a = Node("a")
-    b = Node("b")
-    c = Node("c")
-    d = Node("d")
-    e = Node("e")
-    f = Node("f")
-    a.left = b
-    a.right = c
-    b.left = d
-    b.right = e
-    c.right = f
+        #      a
+        #    /   \
+        #   b     c
+        #  / \     \
+        # d   e     f
 
-    #      a
-    #    /   \
-    #   b     c
-    #  / \     \
-    # d   e     f
+        values = rdepth_first_values(a)
+        assert values == ["a", "b", "d", "e", "c", "f"]
 
-    values = rdepth_first_values(a)
-    assert values == ["a", "b", "d", "e", "c", "f"]
+    def test_06(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+        g = Node("g")
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
+        e.left = g
 
+        #      a
+        #    /   \
+        #   b     c
+        #  / \     \
+        # d   e     f
+        #    /
+        #   g
 
-def test_06(self):
-    a = Node("a")
-    b = Node("b")
-    c = Node("c")
-    d = Node("d")
-    e = Node("e")
-    f = Node("f")
-    g = Node("g")
-    a.left = b
-    a.right = c
-    b.left = d
-    b.right = e
-    c.right = f
-    e.left = g
+        values = rdepth_first_values(a)
+        assert values == ["a", "b", "d", "e", "g", "c", "f"]
 
-    #      a
-    #    /   \
-    #   b     c
-    #  / \     \
-    # d   e     f
-    #    /
-    #   g
+    def test_07(self):
+        a = Node("a")
+        #     a
+        values = rdepth_first_values(a)
+        assert values == ["a"]
 
-    values = rdepth_first_values(a)
-    assert values == ["a", "b", "d", "e", "g", "c", "f"]
+    def test_08(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        a.right = b
+        b.left = c
+        c.right = d
+        d.right = e
 
+        #      a
+        #       \
+        #        b
+        #       /
+        #      c
+        #       \
+        #        d
+        #         \
+        #          e
 
-def test_07(self):
-    a = Node("a")
-    #     a
-    values = rdepth_first_values(a)
-    assert values == ["a"]
+        values = rdepth_first_values(a)
+        assert values == ["a", "b", "c", "d", "e"]
 
-
-def test_08(self):
-    a = Node("a")
-    b = Node("b")
-    c = Node("c")
-    d = Node("d")
-    e = Node("e")
-    a.right = b
-    b.left = c
-    c.right = d
-    d.right = e
-
-    #      a
-    #       \
-    #        b
-    #       /
-    #      c
-    #       \
-    #        d
-    #         \
-    #          e
-
-    values = rdepth_first_values(a)
-    assert values == ["a", "b", "c", "d", "e"]
-
-
-def test_09(self):
-    values = rdepth_first_values(None)
-    assert values == []
+    def test_09(self):
+        values = rdepth_first_values(None)
+        assert values == []
 
 
 if __name__ == "__main__":
