@@ -1,19 +1,8 @@
-from collections import defaultdict, deque
+import unittest
 
 
-graph = {
-    3: [],
-    4: [6],
-    6: [4, 5, 7, 8],
-    8: [6],
-    7: [6],
-    5: [6],
-    1: [2],
-    2: [1]
-}
-
-
-def dfs(graph):
+def connected_components_count(graph):
+    """Return the number of connected components within the graph"""
 
     visited = set()
     count = 0
@@ -33,7 +22,8 @@ def dfs(graph):
     return count
 
 
-def dfs_recursive(graph):
+def connected_components_count_rec(graph):
+    """Return the number of connected components within the graph"""
 
     visited = set()
     count = 0
@@ -55,6 +45,103 @@ def explore(graph, src, visited):
         explore(graph, node, visited)
 
 
+class Test(unittest.TestCase):
+    def test_00(self):
+        assert connected_components_count({
+            0: [8, 1, 5],
+            1: [0],
+            5: [0, 8],
+            8: [0, 5],
+            2: [3, 4],
+            3: [2, 4],
+            4: [3, 2]
+        }) == 2
+
+    def test_01(self):
+        assert connected_components_count({
+            1: [2],
+            2: [1, 8],
+            6: [7],
+            9: [8],
+            7: [6, 8],
+            8: [9, 7, 2]
+        }) == 1
+
+    def test_02(self):
+        assert connected_components_count({
+            3: [],
+            4: [6],
+            6: [4, 5, 7, 8],
+            8: [6],
+            7: [6],
+            5: [6],
+            1: [2],
+            2: [1]
+        }) == 3
+
+    def test_03(self):
+        assert connected_components_count({}) == 0
+
+    def test_04(self):
+        assert connected_components_count({
+            0: [4, 7],
+            1: [],
+            2: [],
+            3: [6],
+            4: [0],
+            6: [3],
+            7: [0],
+            8: []
+        }) == 5
+
+    def test_05(self):
+        assert connected_components_count_rec({
+            0: [8, 1, 5],
+            1: [0],
+            5: [0, 8],
+            8: [0, 5],
+            2: [3, 4],
+            3: [2, 4],
+            4: [3, 2]
+        }) == 2
+
+    def test_06(self):
+        assert connected_components_count_rec({
+            1: [2],
+            2: [1, 8],
+            6: [7],
+            9: [8],
+            7: [6, 8],
+            8: [9, 7, 2]
+        }) == 1
+
+    def test_07(self):
+        assert connected_components_count_rec({
+            3: [],
+            4: [6],
+            6: [4, 5, 7, 8],
+            8: [6],
+            7: [6],
+            5: [6],
+            1: [2],
+            2: [1]
+        }) == 3
+
+    def test_08(self):
+        assert connected_components_count_rec({}) == 0
+
+    def test_09(self):
+        assert connected_components_count_rec({
+            0: [4, 7],
+            1: [],
+            2: [],
+            3: [6],
+            4: [0],
+            6: [3],
+            7: [0],
+            8: []
+        }) == 5
+
+
 if __name__ == '__main__':
-    assert dfs(graph) == 3
-    assert dfs_recursive(graph) == 3
+    unittest.main()
