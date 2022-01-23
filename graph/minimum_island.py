@@ -2,36 +2,7 @@
 https://structy.net/problems/minimum-island
 https://www.youtube.com/watch?v=tWVWeAqZ0WU&t=7132s
 '''
-
-grid1 = [
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'W'],
-    ['W', 'W', 'L', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['L', 'L', 'W', 'W', 'W'],
-]
-
-grid2 = [
-    ['L', 'W', 'W', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['W', 'L', 'W', 'L', 'W'],
-    ['W', 'W', 'W', 'W', 'W'],
-    ['W', 'W', 'L', 'L', 'L'],
-]
-
-grid3 = [
-    ['L', 'L', 'L'],
-    ['L', 'L', 'L'],
-    ['L', 'L', 'L'],
-]
-
-grid4 = [
-    ['W', 'W'],
-    ['L', 'L'],
-    ['W', 'W'],
-    ['W', 'L'],
-]
+import unittest
 
 
 def explore(grid, row, col, visited):
@@ -48,15 +19,17 @@ def explore(grid, row, col, visited):
     visited.add((row, col))
 
     size = 1
-    size += explore(grid, row-1, col, visited)
-    size += explore(grid, row+1, col, visited)
-    size += explore(grid, row, col-1, visited)
-    size += explore(grid, row, col+1, visited)
+    size += explore(grid, row - 1, col, visited)
+    size += explore(grid, row + 1, col, visited)
+    size += explore(grid, row, col - 1, visited)
+    size += explore(grid, row, col + 1, visited)
 
     return size
 
 
 def minimum_island(grid):
+    """Return the size of the smallest island"""
+
     visited = set()
     result = float('inf')
 
@@ -69,11 +42,45 @@ def minimum_island(grid):
     return result
 
 
+class Test(unittest.TestCase):
+    def test_00(self):
+        grid = [
+            ['W', 'L', 'W', 'W', 'W'],
+            ['W', 'L', 'W', 'W', 'W'],
+            ['W', 'W', 'W', 'L', 'W'],
+            ['W', 'W', 'L', 'L', 'W'],
+            ['L', 'W', 'W', 'L', 'L'],
+            ['L', 'L', 'W', 'W', 'W'],
+        ]
+        assert minimum_island(grid) == 2
+
+    def test_01(self):
+        grid = [
+            ['L', 'W', 'W', 'L', 'W'],
+            ['L', 'W', 'W', 'L', 'L'],
+            ['W', 'L', 'W', 'L', 'W'],
+            ['W', 'W', 'W', 'W', 'W'],
+            ['W', 'W', 'L', 'L', 'L'],
+        ]
+        assert minimum_island(grid) == 1
+
+    def test_02(self):
+        grid = [
+            ['L', 'L', 'L'],
+            ['L', 'L', 'L'],
+            ['L', 'L', 'L'],
+        ]
+        assert minimum_island(grid) == 9
+
+    def test_03(self):
+        grid = [
+            ['W', 'W'],
+            ['L', 'L'],
+            ['W', 'W'],
+            ['W', 'L'],
+        ]
+        assert minimum_island(grid) == 1
+
+
 if __name__ == '__main__':
-
-    assert minimum_island(grid1) == 2
-    assert minimum_island(grid2) == 1
-    assert minimum_island(grid3) == 9
-    assert minimum_island(grid4) == 1
-
-    print('OK')
+    unittest.main()
