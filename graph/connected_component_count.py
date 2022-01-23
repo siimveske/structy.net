@@ -2,7 +2,8 @@ import unittest
 
 
 def connected_components_count(graph):
-    """Return the number of connected components within the graph"""
+    """Return the number of connected components
+    (node islands) within the graph"""
 
     visited = set()
     count = 0
@@ -23,7 +24,8 @@ def connected_components_count(graph):
 
 
 def connected_components_count_rec(graph):
-    """Return the number of connected components within the graph"""
+    """Return the number of connected components
+    (node islands) within the graph"""
 
     visited = set()
     count = 0
