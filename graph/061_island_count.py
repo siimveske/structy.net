@@ -1,10 +1,9 @@
-'''
-https://structy.net/problems/island-count
-https://www.youtube.com/watch?v=tWVWeAqZ0WU&t=5976s
-'''
-
-
 import unittest
+
+"""
+--- Island count ---
+Write a function, island_count, that takes in a grid containing Ws and Ls. W represents water and L represents land. The function should return the number of islands on the grid. An island is a vertically or horizontally connected region of land.
+"""
 
 
 def explore(grid, row, col, visited):

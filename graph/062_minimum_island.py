@@ -1,8 +1,11 @@
-'''
-https://structy.net/problems/minimum-island
-https://www.youtube.com/watch?v=tWVWeAqZ0WU&t=7132s
-'''
 import unittest
+
+"""
+--- Minimum island ---
+Write a function, minimum_island, that takes in a grid containing Ws and Ls. W represents water and L represents land. The function should return the size of the smallest island. An island is a vertically or horizontally connected region of land.
+
+You may assume that the grid contains at least one island
+"""
 
 
 def explore(grid, row, col, visited):

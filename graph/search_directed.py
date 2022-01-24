@@ -51,10 +51,6 @@ def dfs_rec(graph, start, end):
     return False
 
 
-def undirectedPath(edges, nodeA, nodeB):
-    pass
-
-
 if __name__ == '__main__':
     assert dfs(graph, 'f', 'h')
     assert bfs(graph, 'f', 'h')
