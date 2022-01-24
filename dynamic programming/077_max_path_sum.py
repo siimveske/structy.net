@@ -30,7 +30,6 @@ def calculate(pos, end, grid, memo):
 
     result = grid[row][col]
 
-    # down
     down_result = calculate((next_row, col), end, grid, memo)
     right_result = calculate((row, next_col), end, grid, memo)
 
