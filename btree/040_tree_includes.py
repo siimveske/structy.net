@@ -1,6 +1,11 @@
 import unittest
 from node import Node
 
+"""
+--- Tree includes ---
+Write a function, tree_includes, that takes in the root of a binary tree and a target value. The function should return a boolean indicating whether or not the value is contained in the tree.
+"""
+
 
 def tree_includes(root: Node, target):
     """Check whether or not the value is contained

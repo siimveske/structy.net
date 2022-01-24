@@ -1,6 +1,11 @@
 import unittest
 from node import Node
 
+"""
+--- Tree sum ---
+Write a function, tree_sum, that takes in the root of a binary tree that contains number values. The function should return the total sum of all values in the tree.
+"""
+
 
 def tree_sum(root: Node):
     """Find sum of btree values iteratively (depth first solution)"""
