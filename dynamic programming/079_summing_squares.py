@@ -40,6 +40,8 @@ def calculate(n, squares, memo):
         if square <= n:
             result = 1 + calculate(n - square, squares, memo)
             min_path = min(result, min_path)
+        else:
+            break
 
     memo[n] = min_path
     return memo[n]
