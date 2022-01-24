@@ -1,6 +1,11 @@
 import unittest
 from node import Node
 
+"""
+--- sum list ---
+Write a function, sum_list, that takes in the head of a linked list containing numbers as an argument. The function should return the total sum of all values in the linked list.
+"""
+
 
 def sum_list(head):
     total = 0
