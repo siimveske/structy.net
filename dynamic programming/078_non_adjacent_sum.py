@@ -7,25 +7,23 @@ Write a function, non_adjacent_sum, that takes in a list of numbers as an argume
 
 
 def non_adjacent_sum(nums):
-    return calculate(nums, {})
+    return calculate(nums, 0, {})
 
 
-def calculate(nums, memo):
-    key = tuple(nums)
-    if key in memo:
-        return memo[key]
-    if not nums:
+def calculate(nums, i, memo):
+
+    if i in memo:
+        return memo[i]
+    if i >= len(nums):
         return 0
 
-    cost = nums[0]
-    left = nums[2:]
-    right = nums[1:]
+    cost = nums[i]
 
-    left_result = calculate(left, memo)
-    right_result = calculate(right, memo)
+    left_result = calculate(nums, i + 2, memo)
+    right_result = calculate(nums, i + 1, memo)
 
-    memo[key] = max(cost + left_result, right_result)
-    return memo[key]
+    memo[i] = max(cost + left_result, right_result)
+    return memo[i]
 
 
 class Test(unittest.TestCase):
