@@ -30,15 +30,15 @@ class Test(unittest.TestCase):
 
     def test_00(self):
         nums = [2, 4, 5, 12, 7]
-        non_adjacent_sum(nums) == 16
+        assert non_adjacent_sum(nums) == 16
 
     def test_01(self):
         nums = [7, 5, 5, 12]
-        non_adjacent_sum(nums) == 19
+        assert non_adjacent_sum(nums) == 19
 
     def test_02(self):
         nums = [7, 5, 5, 12, 17, 29]
-        non_adjacent_sum(nums) == 48
+        assert non_adjacent_sum(nums) == 48
 
     def test_03(self):
         nums = [
@@ -47,7 +47,7 @@ class Test(unittest.TestCase):
             23, 28, 66, 55, 12, 17, 9,
             12, 3, 1, 19, 30, 50, 20
         ]
-        non_adjacent_sum(nums) == 488
+        assert non_adjacent_sum(nums) == 488
 
     def test_04(self):
         nums = [
@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
             72, 62, 10, 6, 20, 19, 42, 46, 24, 78,
             42
         ]
-        non_adjacent_sum(nums) == 1465
+        assert non_adjacent_sum(nums) == 1465
 
 
 if __name__ == "__main__":
