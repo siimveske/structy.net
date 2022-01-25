@@ -23,12 +23,8 @@ def array_stepper(numbers):
 def calculate(numbers, idx, memo):
     if idx in memo:
         return memo[idx]
-    if idx >= len(numbers):
-        return False
-    if idx == len(numbers) - 1:
+    if idx >= len(numbers) - 1:
         return True
-    if numbers[idx] == 0:
-        return False
 
     for i in range(1, numbers[idx] + 1):
         if calculate(numbers, idx + i, memo):
