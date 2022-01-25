@@ -1,5 +1,3 @@
-from hashlib import new
-from re import I
 import unittest
 
 """
