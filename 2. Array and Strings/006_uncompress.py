@@ -8,16 +8,39 @@ for example, '2c' or '3a'.
 The function should return an uncompressed version of the string where each 'char' of a group is repeated 'number' times consecutively. You may assume that the input string is well-formed according to the previously mentioned pattern.
 """
 
+import unittest
 
-"""
-test_00:
-uncompress("2c3a1t") # -> 'ccaaat'
-test_01:
-uncompress("4s2b") # -> 'ssssbb'
-test_02:
-uncompress("2p1o5p") # -> 'ppoppppp'
-test_03:
-uncompress("3n12e2z") # -> 'nnneeeeeeeeeeeezz'
-test_04:
-uncompress("127y") # -> 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
-"""
+
+def uncompress(s):
+    result = []
+
+    count = ''
+    for letter in s:
+        if letter.isdigit():
+            count += letter
+        else:
+            result.append(letter * int(count))
+            count = ''
+
+    return ''.join(result)
+
+
+class Test(unittest.TestCase):
+    def test_00(self):
+        assert uncompress("2c3a1t") == 'ccaaat'
+
+    def test_01(self):
+        assert uncompress("4s2b") == 'ssssbb'
+
+    def test_02(self):
+        assert uncompress("2p1o5p") == 'ppoppppp'
+
+    def test_03(self):
+        assert uncompress("3n12e2z") == 'nnneeeeeeeeeeeezz'
+
+    def test_04(self):
+        assert uncompress("127y") == 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+
+
+if __name__ == "__main__":
+    unittest.main()
