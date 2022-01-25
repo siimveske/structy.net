@@ -16,9 +16,9 @@ def calculate(string, idx, memo):
     start, end = idx
     if idx in memo:
         return memo[idx]
-    if (not string) or (start > end):
+    if start > end:
         return 0
-    if len(string) == 1 or (start == end):
+    if start == end:
         return 1
 
     result = 0
