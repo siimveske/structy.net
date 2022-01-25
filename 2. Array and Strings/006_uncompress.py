@@ -1,5 +1,5 @@
 """
---- uncompress ---
+--- Uncompress ---
 Write a function, uncompress, that takes in a string as an argument. The input string will be formatted into multiple groups according to the following pattern:
 
 <number><char>
@@ -14,13 +14,16 @@ import unittest
 def uncompress(s):
     result = []
 
-    count = ''
+    i = 0
+    j = 0
     for letter in s:
         if letter.isdigit():
-            count += letter
+            j += 1
         else:
-            result.append(letter * int(count))
-            count = ''
+            num = int(s[i:j])
+            result.append(letter * num)
+            j += 1
+            i = j
 
     return ''.join(result)
 
