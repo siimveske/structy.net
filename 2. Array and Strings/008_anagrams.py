@@ -21,7 +21,6 @@ def anagrams(s1, s2):
     return s1_letter_count == s2_letter_count
 
 
-
 class Test(unittest.TestCase):
     def test_00(self):
         assert anagrams('restful', 'fluster') == True
