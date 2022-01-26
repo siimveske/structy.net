@@ -9,13 +9,23 @@ from collections import defaultdict
 
 
 def most_frequent_char(string):
-    result = ''
+    max_cnt = 0
     letter_cnt = defaultdict(int)
+    cnt_to_letter = defaultdict(list)
+
     for letter in string:
         letter_cnt[letter] += 1
-        if letter_cnt[letter] > letter_cnt[result]:
-            result = letter
-    return result
+        cnt_to_letter[letter_cnt[letter]].append(letter)
+        if letter_cnt[letter] > max_cnt:
+            max_cnt = letter_cnt[letter]
+
+    first_letter_idx = len(string)
+    for letter in cnt_to_letter[max_cnt]:
+        letter_idx = string.index(letter)
+        if letter_idx < first_letter_idx:
+            first_letter_idx = letter_idx
+
+    return string[first_letter_idx]
 
 
 class Test(unittest.TestCase):
