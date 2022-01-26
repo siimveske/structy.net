@@ -10,10 +10,13 @@ import unittest
 
 
 def pair_sum(numbers, target_sum):
-    for i in range(len(numbers) - 1):
-        for j in range(i + 1, len(numbers)):
-            if numbers[i] + numbers[j] == target_sum:
-                return (i, j)
+    previous = {}
+    for idx, num in enumerate(numbers):
+        complement = target_sum - num
+        if complement in previous:
+            return (previous[complement], idx)
+        else:
+            previous[num] = idx
 
 
 class Test(unittest.TestCase):
