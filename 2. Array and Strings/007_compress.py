@@ -10,27 +10,22 @@ You can assume that the input only contains alphabetic characters.
 import unittest
 
 
-def store_result(string, start, end, container):
-    qty = end - start
-    item = string[start]
-    if qty > 1:
-        container.append(f"{qty}{item}")
-    else:
-        container.append(item)
-
-
 def compress(string):
     result = []
     start = 0
     end = 0
+    string += "!"  # hack to catch last set of characters
     str_length = len(string)
     while end < str_length:
         if string[start] == string[end]:
             end += 1
         else:
-            store_result(string, start, end, result)
+            qty = end - start
+            item = string[start]
+            if qty > 1:
+                result.append(str(qty))
+            result.append(item)
             start = end
-    store_result(string, start, end, result)
 
     return ''.join(result)
 
