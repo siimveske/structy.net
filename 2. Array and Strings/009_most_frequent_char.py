@@ -21,6 +21,7 @@ def most_frequent_char(string):
 
     return result
 
+
 class Test(unittest.TestCase):
     def test_00(self):
         assert most_frequent_char('bookeeper') == 'e'
