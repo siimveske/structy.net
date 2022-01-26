@@ -11,8 +11,29 @@ from node import Node
 from _019_linked_list_values import linked_list_values
 
 
-def merge_lists(head_1, head_2):
-    pass  # todo
+def merge_lists(head_1: Node, head_2: Node):
+
+    root = Node(None)
+
+    cur_head1 = head_1
+    cur_head2 = head_2
+    tail = root
+
+    while cur_head1 and cur_head2:
+        if cur_head1.val < cur_head2.val:
+            tail.next = cur_head1
+            cur_head1 = cur_head1.next
+        else:
+            tail.next = cur_head2
+            cur_head2 = cur_head2.next
+        tail = tail.next
+
+    if cur_head1:
+        tail.next = cur_head1
+    else:
+        tail.next = cur_head2
+
+    return root.next
 
 
 class Test(unittest.TestCase):
