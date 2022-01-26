@@ -16,9 +16,7 @@ def five_sort(nums):
             while i < j and nums[j] == 5:
                 j -= 1
             if i < j:
-                tmp = nums[j]
-                nums[j] = nums[i]
-                nums[i] = tmp
+                nums[i], nums[j] = nums[j], nums[i]
         else:
             i += 1
 
