@@ -12,6 +12,7 @@ def linked_list_values(head):
 
     while current_node:
         values.append(current_node.val)
+        current_node = current_node.next
 
     return values
 
