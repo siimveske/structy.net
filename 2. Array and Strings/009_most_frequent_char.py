@@ -20,25 +20,25 @@ def most_frequent_char(string):
 
 class Test(unittest.TestCase):
     def test_00(self):
-        most_frequent_char('bookeeper') == 'e'
+        assert most_frequent_char('bookeeper') == 'e'
 
     def test_01(self):
-        most_frequent_char('david') == 'd'
+        assert most_frequent_char('david') == 'd'
 
     def test_02(self):
-        most_frequent_char('abby') == 'b'
+        assert most_frequent_char('abby') == 'b'
 
     def test_03(self):
-        most_frequent_char('mississippi') == 'i'
+        assert most_frequent_char('mississippi') == 'i'
 
     def test_04(self):
-        most_frequent_char('potato') == 'o'
+        assert most_frequent_char('potato') == 'o'
 
     def test_05(self):
-        most_frequent_char('eleventennine') == 'e'
+        assert most_frequent_char('eleventennine') == 'e'
 
     def test_06(self):
-        most_frequent_char('riverbed') == 'r'
+        assert most_frequent_char('riverbed') == 'r'
 
 
 if __name__ == "__main__":
