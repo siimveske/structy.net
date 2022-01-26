@@ -10,25 +10,25 @@ You can assume that the input only contains alphabetic characters.
 import unittest
 
 
-def store_result(s, head, tail, container):
-    qty = head - tail
-    item = s[tail]
+def store_result(string, start, end, container):
+    qty = end - start
+    item = string[start]
     if qty > 1:
         container.append(f"{qty}{item}")
     else:
         container.append(item)
 
 
-def compress(s):
+def compress(string):
     result = []
-    tail = 0
-    head = 0
-    for character in s:
-        if s[tail] != s[head]:
-            store_result(s, head, tail, result)
-            tail = head
-        head += 1
-    store_result(s, head, tail, result)
+    start = 0
+    end = 0
+    for character in string:
+        if string[start] != string[end]:
+            store_result(string, start, end, result)
+            start = end
+        end += 1
+    store_result(string, start, end, result)
 
     return ''.join(result)
 
