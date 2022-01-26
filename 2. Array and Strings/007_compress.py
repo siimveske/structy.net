@@ -23,11 +23,13 @@ def compress(string):
     result = []
     start = 0
     end = 0
-    for character in string:
-        if string[start] != string[end]:
+    str_length = len(string)
+    while end < str_length:
+        if string[start] == string[end]:
+            end += 1
+        else:
             store_result(string, start, end, result)
             start = end
-        end += 1
     store_result(string, start, end, result)
 
     return ''.join(result)
