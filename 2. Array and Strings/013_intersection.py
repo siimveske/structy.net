@@ -9,32 +9,19 @@ import unittest
 
 def intersection(a, b):
 
-    result = []
-
-    if len(a) > len(b):
-        memo = set(a)
-        for number in b:
-            if number in memo:
-                result.append(number)
-    else:
-        memo = set(b)
-        for number in a:
-            if number in memo:
-                result.append(number)
-
-    result.sort()
-    return result
+    memo = set(a)
+    return [item for item in b if item in memo]
 
 
 class Test(unittest.TestCase):
     def test_00(self):
-        assert intersection([4, 2, 1, 6], [3, 6, 9, 2, 10]) == [2, 6]
+        assert sorted(intersection([4, 2, 1, 6], [3, 6, 9, 2, 10])) == [2, 6]
 
     def test_01(self):
-        assert intersection([2, 4, 6], [4, 2]) == [2, 4]
+        assert sorted(intersection([2, 4, 6], [4, 2])) == [2, 4]
 
     def test_02(self):
-        assert intersection([4, 2, 1], [1, 2, 4, 6]) == [1, 2, 4]
+        assert sorted(intersection([4, 2, 1], [1, 2, 4, 6])) == [1, 2, 4]
 
     def test_03(self):
         assert intersection([0, 1, 2], [10, 11]) == []
@@ -42,7 +29,7 @@ class Test(unittest.TestCase):
     def test_04(self):
         a = [i for i in range(0, 50000)]
         b = [i for i in range(0, 50000)]
-        assert intersection(a, b) == [i for i in range(0, 50000)]
+        assert sorted(intersection(a, b)) == [i for i in range(0, 50000)]
 
 
 if __name__ == "__main__":
