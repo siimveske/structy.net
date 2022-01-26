@@ -1,11 +1,7 @@
 import importlib
 import unittest
 from node import Node
-
-# Hack because python modules can't start with a number
-linked = importlib.import_module('019_linked_list_values')
-linked_list_values = linked.linked_list_values
-
+from _019_linked_list_values import linked_list_values
 """
 --- Zipper lists ---
 Write a function, zipper_lists, that takes in the head of two linked lists as arguments. The function should zipper the two lists together into single linked list by alternating nodes. If one of the linked lists is longer than the other, the resulting list should terminate with the remaining nodes. The function should return the head of the zippered linked list.

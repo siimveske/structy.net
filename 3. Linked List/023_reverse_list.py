@@ -1,11 +1,6 @@
-import importlib
 import unittest
 from node import Node
-
-# Hack because python modules can't start with a number
-linked = importlib.import_module('019_linked_list_values')
-linked_list_values = linked.linked_list_values
-
+from _019_linked_list_values import linked_list_values
 """
 --- Reverse list ---
 Write a function, reverse_list, that takes in the head of a linked list as an argument. The function should reverse the order of the nodes in the linked list in-place and return the new head of the reversed linked list.
