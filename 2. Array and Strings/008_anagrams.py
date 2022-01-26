@@ -18,11 +18,8 @@ def anagrams(s1, s2):
         s1_letter_count[s1[idx]] += 1
         s2_letter_count[s2[idx]] += 1
 
-    for key, val in s1_letter_count.items():
-        if s2_letter_count[key] != val:
-            return False
+    return s1_letter_count == s2_letter_count
 
-    return True
 
 
 class Test(unittest.TestCase):
