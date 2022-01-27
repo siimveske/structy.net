@@ -33,6 +33,15 @@ def insert_node(head, value, index):
     return head
 
 
+def insert_node_rec(head, value, index):
+    if index == 0:
+        node = Node(value)
+        node.next = head
+        return node
+    head.next = insert_node_rec(head.next, value, index - 1)
+    return head
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         a = Node("a")
@@ -88,6 +97,62 @@ class Test(unittest.TestCase):
         # a -> b
 
         result = insert_node(a, 'z', 0)
+        assert str_list(result) == "z -> a -> b"
+
+    def test_04(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+
+        a.next = b
+        b.next = c
+        c.next = d
+
+        # a -> b -> c -> d
+
+        result = insert_node_rec(a, 'x', 2)
+        assert str_list(result) == "a -> b -> x -> c -> d"
+
+    def test_05(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+
+        a.next = b
+        b.next = c
+        c.next = d
+
+        # a -> b -> c -> d
+
+        result = insert_node_rec(a, 'v', 3)
+        assert str_list(result) == "a -> b -> c -> v -> d"
+
+    def test_06(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+
+        a.next = b
+        b.next = c
+        c.next = d
+
+        # a -> b -> c -> d
+
+        result = insert_node_rec(a, 'm', 4)
+        assert str_list(result) == "a -> b -> c -> d -> m"
+
+    def test_07(self):
+        a = Node("a")
+        b = Node("b")
+
+        a.next = b
+
+        # a -> b
+
+        result = insert_node_rec(a, 'z', 0)
         assert str_list(result) == "z -> a -> b"
 
 
