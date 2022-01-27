@@ -9,22 +9,22 @@ from node import Node
 
 def longest_streak(head):
 
-    cnt = 0
-    longest = 0
+    max_streak = 0
+    current_streak = 0
     previous = head
     current = head
 
     while current:
         if current.val == previous.val:
-            cnt += 1
-            if cnt > longest:
-                longest = cnt
+            current_streak += 1
+            if current_streak > max_streak:
+                max_streak = current_streak
         else:
-            cnt = 1
+            current_streak = 1
         previous = current
         current = current.next
 
-    return longest
+    return max_streak
 
 
 class Test(unittest.TestCase):
