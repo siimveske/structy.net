@@ -14,23 +14,31 @@ from _019_linked_list_values import linked_list_values
 
 
 def remove_node(head: Node, target_val):
-    if head.val == target_val and not head.next:
-        return None
+    if head.val == target_val:
+        return head.next
 
     current = head
     previous = None
 
     while current:
         if current.val == target_val:
-            if previous:
-                previous.next = current.next
-            else:
-                head = head.next
+            previous.next = current.next
             break
         previous = current
         current = current.next
 
     return head
+
+
+# def remove_node(head, target_val):
+#     if not head:
+#         return None
+
+#     if head.val == target_val:
+#         return head.next
+
+#     head.next = remove_node(head.next, target_val)
+#     return head
 
 
 class Test(unittest.TestCase):
