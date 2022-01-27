@@ -8,9 +8,6 @@ from _019_linked_list_values import str_list
 
 
 def create_linked_list(values):
-    if not values:
-        return None
-
     root = Node(None)
     current = root
     for value in values:
