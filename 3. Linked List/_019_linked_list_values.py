@@ -22,7 +22,7 @@ def str_list(head):
     result = []
     for idx, value in enumerate(values):
         result.append(str(value))
-        if idx < len(values):
+        if idx < len(values) - 1:
             result.append(" -> ")
     return ''.join(result)
 
@@ -56,6 +56,19 @@ class Test(unittest.TestCase):
     def test_03(self):
 
         assert linked_list_values(None) == []
+
+    def test_04(self):
+        a = Node("a")
+        assert str_list(a) == "a"
+
+    def test_05(self):
+        a = Node("a")
+        b = Node("b")
+
+        a.next = b
+        # a -> b
+
+        assert str_list(a) == "a -> b"
 
 
 if __name__ == "__main__":
