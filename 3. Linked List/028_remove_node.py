@@ -30,15 +30,15 @@ def remove_node(head: Node, target_val):
     return head
 
 
-# def remove_node(head, target_val):
-#     if not head:
-#         return None
+def remove_node_rec(head, target_val):
+    if not head:
+        return None
 
-#     if head.val == target_val:
-#         return head.next
+    if head.val == target_val:
+        return head.next
 
-#     head.next = remove_node(head.next, target_val)
-#     return head
+    head.next = remove_node_rec(head.next, target_val)
+    return head
 
 
 class Test(unittest.TestCase):
@@ -108,6 +108,73 @@ class Test(unittest.TestCase):
         # t
 
         remove_node(t, "t") == None
+
+    def test_05(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+
+        a.next = b
+        b.next = c
+        c.next = d
+        d.next = e
+        e.next = f
+
+        # a -> b -> c -> d -> e -> f
+
+        result = remove_node_rec(a, "c")
+        assert linked_list_values(result) == ["a", "b", "d", "e", "f"]
+
+    def test_06(self):
+        x = Node("x")
+        y = Node("y")
+        z = Node("z")
+
+        x.next = y
+        y.next = z
+
+        # x -> y -> z
+
+        result = remove_node_rec(x, "z")
+        assert linked_list_values(result) == ["x", "y"]
+
+    def test_07(self):
+        q = Node("q")
+        r = Node("r")
+        s = Node("s")
+
+        q.next = r
+        r.next = s
+
+        # q -> r -> s
+
+        result = remove_node_rec(q, "q")
+        assert linked_list_values(result) == ["r", "s"]
+
+    def test_08(self):
+        node1 = Node("h")
+        node2 = Node("i")
+        node3 = Node("j")
+        node4 = Node("i")
+
+        node1.next = node2
+        node2.next = node3
+        node3.next = node4
+
+        # h -> i -> j -> i
+
+        result = remove_node_rec(node1, "i")
+        assert linked_list_values(result) == ["h", "j", "i"]
+
+    def test_09(self):
+        t = Node("t")
+
+        # t
+
+        remove_node_rec(t, "t") == None
 
 
 if __name__ == "__main__":
