@@ -17,6 +17,16 @@ def linked_list_values(head):
     return values
 
 
+def str_list(head):
+    values = linked_list_values(head)
+    result = []
+    for idx, value in enumerate(values):
+        result.append(str(value))
+        if idx < len(values):
+            result.append(" -> ")
+    return ''.join(result)
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         a = Node("a")
