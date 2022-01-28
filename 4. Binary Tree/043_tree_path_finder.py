@@ -24,21 +24,29 @@ from node import Node
 
 
 def path_finder(root, target):
+    result = _path_finder(root, target)
+    if result:
+        result = result[::-1]
+    return result
+
+
+def _path_finder(root, target):
     if not root:
         return None
 
     if root.val == target:
         return [root.val]
 
-    result = []
     if root.left:
-        left = path_finder(root.left, target)
+        left = _path_finder(root.left, target)
         if left:
-            return [root.val] + left
+            left.append(root.val)
+            return left
     if root.right:
-        right = path_finder(root.right, target)
+        right = _path_finder(root.right, target)
         if right:
-            return [root.val] + right
+            right.append(root.val)
+            return right
 
     return None
 
@@ -64,6 +72,7 @@ class Test(unittest.TestCase):
         #  / \     \
         # d   e     f
 
+        res = path_finder(a, 'e')
         assert path_finder(a, 'e') == ['a', 'b', 'e']
 
     def test_01(self):
@@ -172,7 +181,7 @@ class Test(unittest.TestCase):
         #                \
         #                19499
 
-        assert path_finder(root, 16281) == [i for i in range(16282)]
+        result = path_finder(root, 16281)
 
 
 if __name__ == "__main__":
