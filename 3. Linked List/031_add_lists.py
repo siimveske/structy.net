@@ -20,32 +20,57 @@ import unittest
 from node import Node
 from _019_linked_list_values import str_list
 
+# def add_lists(head_1, head_2):
+#     dummy = Node(None)
+#     tail = dummy
+#     current1 = head_1
+#     current2 = head_2
+#     carry = 0
+
+#     while current1 or current2:
+#         val1 = current1.val if current1 else 0
+#         val2 = current2.val if current2 else 0
+#         total = val1 + val2 + carry
+#         tail.next = Node(total % 10)
+#         carry = total // 10
+
+#         tail = tail.next
+#         current1 = current1.next if current1 else None
+#         current2 = current2.next if current2 else None
+
+#     if carry:
+#         tail.next = Node(carry)
+
+#     return dummy.next
+
 
 def add_lists(head_1, head_2):
-    dummy = Node(None)
-    tail = dummy
-    current1 = head_1
-    current2 = head_2
-    carry = 0
+    return _add_lists(head_1, head_2, 0)
 
-    while current1 or current2:
-        val1 = current1.val if current1 else 0
-        val2 = current2.val if current2 else 0
-        total = val1 + val2 + carry
-        tail.next = Node(total % 10)
-        carry = total // 10
 
-        tail = tail.next
-        current1 = current1.next if current1 else None
-        current2 = current2.next if current2 else None
+def _add_lists(head_1, head_2, carry):
+    if not head_1 and not head_2:
+        if carry:
+            return Node(carry)
+        else:
+            return None
 
-    if carry:
-        tail.next = Node(carry)
+    val1 = head_1.val if head_1 else 0
+    val2 = head_2.val if head_2 else 0
+    total = val1 + val2 + carry
+    val = total % 10
+    carry = total // 10
 
-    return dummy.next
+    node = Node(val)
+    head_1 = head_1.next if head_1 else None
+    head_2 = head_2.next if head_2 else None
+    node.next = _add_lists(head_1, head_2, carry)
+
+    return node
 
 
 class Test(unittest.TestCase):
+
     def test_00(self):
         #   621
         # + 354
