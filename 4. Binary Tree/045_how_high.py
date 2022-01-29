@@ -33,15 +33,9 @@ def how_high_rec(node):
     if not node:
         return -1
 
-    tree_depth = 0
-    if node.left:
-        left = 1 + how_high_rec(node.left)
-        tree_depth = max(tree_depth, left)
-    if node.right:
-        right = 1 + how_high_rec(node.right)
-        tree_depth = max(tree_depth, right)
-
-    return tree_depth
+    left = 1 + how_high_rec(node.left)
+    right = 1 + how_high_rec(node.right)
+    return max(left, right)
 
 
 class Test(unittest.TestCase):
