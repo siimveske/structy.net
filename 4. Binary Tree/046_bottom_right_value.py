@@ -8,28 +8,42 @@ You may assume that the input tree is non-empty.
 
 import unittest
 from node import Node
+from collections import deque
+
+# def bottom_right_value(root):
+
+#     stack = [(root, ["1"])]
+#     result = ''
+#     max_val = float("-inf")
+
+#     while stack:
+#         node, val = stack.pop()
+#         if node.left:
+#             stack.append((node.left, [*val, "0"]))
+#         if node.right:
+#             stack.append((node.right, [*val, "1"]))
+#         if not node.left and not node.right:
+#             bin_value = ''.join(val)
+#             dec_value = int(bin_value, 2)
+#             if dec_value > max_val:
+#                 max_val = dec_value
+#                 result = node.val
+
+#     return result
 
 
 def bottom_right_value(root):
+    '''Use breath first algorithm to find bottom most right value'''
 
-    stack = [(root, ["1"])]
-    result = ''
-    max_val = float("-inf")
-
+    stack = deque([root])
     while stack:
-        node, val = stack.pop()
+        node = stack.popleft()
+        if not node.left and not node.right and not stack:
+            return node.val
         if node.left:
-            stack.append((node.left, [*val, "0"]))
+            stack.append(node.left)
         if node.right:
-            stack.append((node.right, [*val, "1"]))
-        if not node.left and not node.right:
-            bin_value = ''.join(val)
-            dec_value = int(bin_value, 2)
-            if dec_value > max_val:
-                max_val = dec_value
-                result = node.val
-
-    return result
+            stack.append(node.right)
 
 
 class Test(unittest.TestCase):
