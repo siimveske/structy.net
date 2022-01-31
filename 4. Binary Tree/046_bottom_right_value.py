@@ -35,15 +35,17 @@ from collections import deque
 def bottom_right_value(root):
     '''Use breath first algorithm to find bottom most right value'''
 
+    node = None
     stack = deque([root])
+
     while stack:
         node = stack.popleft()
-        if not node.left and not node.right and not stack:
-            return node.val
         if node.left:
             stack.append(node.left)
         if node.right:
             stack.append(node.right)
+
+    return node.val
 
 
 class Test(unittest.TestCase):
