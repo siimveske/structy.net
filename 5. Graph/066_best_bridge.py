@@ -41,10 +41,10 @@ def best_bridge(grid):
         stack.append((r, c - 1))
 
     # Use breath first search to find shortest path to other island
-    visited = set().union(island)
     best_bridge = float("inf")
     for cell in island:
         stack = deque([(*cell, 0)])
+        visited = set().union(island)
         while stack:
             r, c, dist = stack.popleft()
             if (r, c) not in visited and grid[r][c] == "L":
@@ -69,35 +69,35 @@ def best_bridge(grid):
 
 
 class Test(unittest.TestCase):
-    # def test_00(self):
-    #     grid = [
-    #         ["W", "W", "W", "L", "L"],
-    #         ["L", "L", "W", "W", "L"],
-    #         ["L", "L", "L", "W", "L"],
-    #         ["W", "L", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W"],
-    #     ]
-    #     assert best_bridge(grid) == 1
+    def test_00(self):
+        grid = [
+            ["W", "W", "W", "L", "L"],
+            ["L", "L", "W", "W", "L"],
+            ["L", "L", "L", "W", "L"],
+            ["W", "L", "W", "W", "W"],
+            ["W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W"],
+        ]
+        assert best_bridge(grid) == 1
 
-    # def test_01(self):
-    #     grid = [
-    #         ["W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W"],
-    #         ["L", "L", "W", "W", "L"],
-    #         ["W", "L", "W", "W", "L"],
-    #         ["W", "W", "W", "L", "L"],
-    #         ["W", "W", "W", "W", "W"],
-    #     ]
-    #     assert best_bridge(grid) == 2
+    def test_01(self):
+        grid = [
+            ["W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W"],
+            ["L", "L", "W", "W", "L"],
+            ["W", "L", "W", "W", "L"],
+            ["W", "W", "W", "L", "L"],
+            ["W", "W", "W", "W", "W"],
+        ]
+        assert best_bridge(grid) == 2
 
-    # def test_02(self):
-    #     grid = [
-    #         ["W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "L", "W"],
-    #         ["L", "W", "W", "W", "W"],
-    #     ]
-    #     assert best_bridge(grid) == 3
+    def test_02(self):
+        grid = [
+            ["W", "W", "W", "W", "W"],
+            ["W", "W", "W", "L", "W"],
+            ["L", "W", "W", "W", "W"],
+        ]
+        assert best_bridge(grid) == 3
 
     def test_03(self):
         grid = [
@@ -114,35 +114,35 @@ class Test(unittest.TestCase):
         ]
         assert best_bridge(grid) == 3
 
-    # def test_04(self):
-    #     grid = [
-    #         ["L", "L", "L", "L", "L", "L", "L", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "L", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "W", "W", "W", "W", "W", "W", "L"],
-    #         ["L", "L", "L", "L", "L", "L", "L", "L"],
-    #     ]
-    #     assert best_bridge(grid) == 2
+    def test_04(self):
+        grid = [
+            ["L", "L", "L", "L", "L", "L", "L", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "L", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "W", "W", "W", "W", "W", "W", "L"],
+            ["L", "L", "L", "L", "L", "L", "L", "L"],
+        ]
+        assert best_bridge(grid) == 2
 
-    # def test_05(self):
-    #     grid = [
-    #         ["W", "L", "W", "W", "W", "W", "W", "W"],
-    #         ["W", "L", "W", "W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W", "W", "W", "W"],
-    #         ["W", "W", "W", "W", "W", "W", "L", "W"],
-    #         ["W", "W", "W", "W", "W", "W", "L", "L"],
-    #         ["W", "W", "W", "W", "W", "W", "W", "L"],
-    #     ]
-    #     assert best_bridge(grid) == 8
+    def test_05(self):
+        grid = [
+            ["W", "L", "W", "W", "W", "W", "W", "W"],
+            ["W", "L", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", "L", "W"],
+            ["W", "W", "W", "W", "W", "W", "L", "L"],
+            ["W", "W", "W", "W", "W", "W", "W", "L"],
+        ]
+        assert best_bridge(grid) == 8
 
 
 if __name__ == "__main__":
