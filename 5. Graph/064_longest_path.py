@@ -21,22 +21,27 @@ def longest_path(graph):
 
 
 def longest_path_rec(graph):
-    max_result = 0
+    memo = {}
     for node in graph:
-        result = explore(graph, node)
-        max_result = max(max_result, result)
-    return max_result
+        explore(graph, node, memo)
+    return max(memo.values())
 
 
-def explore(graph, node):
+def explore(graph, node, memo):
+    if node in memo:
+        return memo[node]
+
     if not graph[node]:
-        return 0
+        memo[node] = 0
+        return memo[node]
 
     best = 0
     for neighbor in graph[node]:
-        result = 1 + explore(graph, neighbor)
-        best = max(best, result)
-    return best
+        distance = 1 + explore(graph, neighbor, memo)
+        best = max(best, distance)
+
+    memo[node] = best
+    return memo[node]
 
 
 class Test(unittest.TestCase):
