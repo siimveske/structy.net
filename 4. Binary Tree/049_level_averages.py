@@ -9,10 +9,36 @@ from node import Node
 
 
 def level_averages(root: Node):
+    if not root:
+        return []
+
+    levels = []
+    averages = []
+    stack = [(root, 0)]
+
+    while stack:
+        node, level = stack.pop()
+        if len(levels) == level:
+            levels.append([])
+        levels[level].append(node.val)
+
+        if node.left:
+            stack.append((node.left, level + 1))
+        if node.right:
+            stack.append((node.right, level + 1))
+
+    for level in levels:
+        avg = sum(level) / len(level)
+        averages.append(avg)
+
+    return averages
+
+
+def level_averages_rec(root: Node):
     levels = []
     averages = []
 
-    _level_averages(root, levels, 0)
+    _level_averages_rec(root, levels, 0)
 
     for level in levels:
         average = sum(level) / len(level)
@@ -21,7 +47,7 @@ def level_averages(root: Node):
     return averages
 
 
-def _level_averages(root: Node, levels: list, level: int):
+def _level_averages_rec(root: Node, levels: list, level: int):
     if not root:
         return
 
@@ -29,8 +55,8 @@ def _level_averages(root: Node, levels: list, level: int):
         levels.append([])
     levels[level].append(root.val)
 
-    _level_averages(root.left, levels, level + 1)
-    _level_averages(root.right, levels, level + 1)
+    _level_averages_rec(root.left, levels, level + 1)
+    _level_averages_rec(root.right, levels, level + 1)
 
 
 class Test(unittest.TestCase):
@@ -138,6 +164,111 @@ class Test(unittest.TestCase):
 
     def test_04(self):
         assert level_averages(None) == []
+
+    def test_05(self):
+        a = Node(3)
+        b = Node(11)
+        c = Node(4)
+        d = Node(4)
+        e = Node(-2)
+        f = Node(1)
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
+
+        #       3
+        #    /    \
+        #   11     4
+        #  / \      \
+        # 4   -2     1
+
+        assert level_averages_rec(a) == [3, 7.5, 1]
+
+    def test_06(self):
+        a = Node(5)
+        b = Node(11)
+        c = Node(54)
+        d = Node(20)
+        e = Node(15)
+        f = Node(1)
+        g = Node(3)
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        e.left = f
+        e.right = g
+
+        #        5
+        #     /    \
+        #    11    54
+        #  /   \
+        # 20   15
+        #      / \
+        #     1  3
+
+        assert level_averages_rec(a) == [5, 32.5, 17.5, 2]
+
+    def test_07(self):
+        a = Node(-1)
+        b = Node(-6)
+        c = Node(-5)
+        d = Node(-3)
+        e = Node(0)
+        f = Node(45)
+        g = Node(-1)
+        h = Node(-2)
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
+        e.left = g
+        f.right = h
+
+        #        -1
+        #      /   \
+        #    -6    -5
+        #   /  \     \
+        # -3   0     45
+        #     /       \
+        #    -1       -2
+
+        assert level_averages_rec(a) == [-1, -5.5, 14, -1.5]
+
+    def test_08(self):
+        q = Node(13)
+        r = Node(4)
+        s = Node(2)
+        t = Node(9)
+        u = Node(2)
+        v = Node(42)
+
+        q.left = r
+        q.right = s
+        r.right = t
+        t.left = u
+        u.right = v
+
+        #        13
+        #      /   \
+        #     4     2
+        #      \
+        #       9
+        #      /
+        #     2
+        #    /
+        #   42
+
+        assert level_averages_rec(q) == [13, 3, 9, 2, 42]
+
+    def test_09(self):
+        assert level_averages_rec(None) == []
 
 
 if __name__ == "__main__":
