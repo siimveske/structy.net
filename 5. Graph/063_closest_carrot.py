@@ -13,10 +13,10 @@ def closest_carrot(grid, starting_row, starting_col):
     while queue:
         row, col, distance = queue.popleft()
 
-        rowInbound = 0 <= row < len(grid)
-        colInboud = 0 <= col < len(grid[0])
+        row_inbounds = 0 <= row < len(grid)
+        col_inbounds = 0 <= col < len(grid[0])
 
-        if not rowInbound or not colInboud:
+        if not row_inbounds or not col_inbounds:
             continue
         if grid[row][col] == 'X':
             continue
