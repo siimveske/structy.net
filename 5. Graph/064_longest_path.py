@@ -20,6 +20,25 @@ def longest_path(graph):
     return longest
 
 
+def longest_path_rec(graph):
+    max_result = 0
+    for node in graph:
+        result = explore(graph, node)
+        max_result = max(max_result, result)
+    return max_result
+
+
+def explore(graph, node):
+    if not graph[node]:
+        return 0
+
+    best = 0
+    for neighbor in graph[node]:
+        result = 1 + explore(graph, neighbor)
+        best = max(best, result)
+    return best
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         graph = {
@@ -69,6 +88,55 @@ class Test(unittest.TestCase):
         }
 
         assert longest_path(graph) == 3
+
+    def test_04(self):
+        graph = {
+            'a': ['c', 'b'],
+            'b': ['c'],
+            'c': []
+        }
+
+        assert longest_path_rec(graph) == 2
+
+    def test_05(self):
+        graph = {
+            'a': ['c', 'b'],
+            'b': ['c'],
+            'c': [],
+            'q': ['r'],
+            'r': ['s', 'u', 't'],
+            's': ['t'],
+            't': ['u'],
+            'u': []
+        }
+
+        assert longest_path_rec(graph) == 4
+
+    def test_06(self):
+        graph = {
+            'h': ['i', 'j', 'k'],
+            'g': ['h'],
+            'i': [],
+            'j': [],
+            'k': [],
+            'x': ['y'],
+            'y': []
+        }
+
+        assert longest_path_rec(graph) == 2
+
+    def test_07(self):
+        graph = {
+            'a': ['b'],
+            'b': ['c'],
+            'c': [],
+            'e': ['f'],
+            'f': ['g'],
+            'g': ['h'],
+            'h': []
+        }
+
+        assert longest_path_rec(graph) == 3
 
 
 if __name__ == "__main__":
