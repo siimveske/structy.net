@@ -6,7 +6,6 @@ Write a function, tree_levels, that takes in the root of a binary tree. The func
 import unittest
 from node import Node
 from collections import deque
-from collections import defaultdict
 
 
 def tree_levels(root):
@@ -15,18 +14,18 @@ def tree_levels(root):
 
     queue = deque([(root, 0)])
     levels = []
-    result = defaultdict(list)
 
     while queue:
         node, level = queue.popleft()
-        result[level].append(node.val)
+
+        if len(levels) == level:
+            levels.append([])
+        levels[level].append(node.val)
+
         if node.left:
             queue.append((node.left, level + 1))
         if node.right:
             queue.append((node.right, level + 1))
-
-    for key in result:
-        levels.append(result[key])
 
     return levels
 
