@@ -25,6 +25,16 @@ def leaf_list(root):
     return result
 
 
+def leaf_list_rec(root):
+    if not root:
+        return []
+
+    if not root.left and not root.right:
+        return [root.val]
+
+    return leaf_list_rec(root.left) + leaf_list_rec(root.right)
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         a = Node("a")
@@ -111,6 +121,92 @@ class Test(unittest.TestCase):
 
     def test_04(self):
         assert leaf_list(None) == []
+
+    def test_05(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
+
+        #      a
+        #    /   \
+        #   b     c
+        #  / \     \
+        # d   e     f
+
+        assert leaf_list_rec(a) == ['d', 'e', 'f']
+
+    def test_06(self):
+        a = Node("a")
+        b = Node("b")
+        c = Node("c")
+        d = Node("d")
+        e = Node("e")
+        f = Node("f")
+        g = Node("g")
+        h = Node("h")
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        c.right = f
+        e.left = g
+        f.right = h
+
+        #      a
+        #    /   \
+        #   b     c
+        #  / \     \
+        # d   e     f
+        #    /       \
+        #   g         h
+
+        assert leaf_list_rec(a) == ['d', 'g', 'h']
+
+    def test_07(self):
+        a = Node(5)
+        b = Node(11)
+        c = Node(54)
+        d = Node(20)
+        e = Node(15)
+        f = Node(1)
+        g = Node(3)
+
+        a.left = b
+        a.right = c
+        b.left = d
+        b.right = e
+        e.left = f
+        e.right = g
+
+        #        5
+        #     /    \
+        #    11    54
+        #  /   \
+        # 20   15
+        #      / \
+        #     1  3
+
+        assert leaf_list_rec(a) == [20, 1, 3, 54]
+
+    def test_08(self):
+        x = Node('x')
+
+        #      x
+
+        assert leaf_list_rec(x) == ['x']
+
+    def test_09(self):
+        assert leaf_list_rec(None) == []
 
 
 if __name__ == "__main__":
