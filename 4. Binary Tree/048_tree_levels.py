@@ -8,26 +8,43 @@ from node import Node
 from collections import deque
 
 
-def tree_levels(root):
-    if not root:
-        return []
+# def tree_levels(root):
+#     if not root:
+#         return []
 
-    queue = deque([(root, 0)])
+#     queue = deque([(root, 0)])
+#     levels = []
+
+#     while queue:
+#         node, level = queue.popleft()
+
+#         if len(levels) == level:
+#             levels.append([])
+#         levels[level].append(node.val)
+
+#         if node.left:
+#             queue.append((node.left, level + 1))
+#         if node.right:
+#             queue.append((node.right, level + 1))
+
+#     return levels
+
+def tree_levels(root: Node):
     levels = []
-
-    while queue:
-        node, level = queue.popleft()
-
-        if len(levels) == level:
-            levels.append([])
-        levels[level].append(node.val)
-
-        if node.left:
-            queue.append((node.left, level + 1))
-        if node.right:
-            queue.append((node.right, level + 1))
-
+    _tree_levels(root, levels, 0)
     return levels
+
+
+def _tree_levels(root: Node, levels: list, level: int):
+    if not root:
+        return
+
+    if len(levels) == level:
+        levels.append([])
+    levels.append(root.val)
+
+    _tree_levels(root.left, levels, level + 1)
+    _tree_levels(root.right, levels, level + 1)
 
 
 class Test(unittest.TestCase):
