@@ -5,27 +5,26 @@ Write a function, tree_levels, that takes in the root of a binary tree. The func
 
 import unittest
 from node import Node
-from collections import deque
 
 
 def tree_levels(root):
     if not root:
         return []
 
-    queue = deque([(root, 0)])
+    queue = [(root, 0)]
     levels = []
 
     while queue:
-        node, level = queue.popleft()
+        node, level = queue.pop()
 
         if len(levels) == level:
             levels.append([])
         levels[level].append(node.val)
 
-        if node.left:
-            queue.append((node.left, level + 1))
         if node.right:
             queue.append((node.right, level + 1))
+        if node.left:
+            queue.append((node.left, level + 1))
 
     return levels
 
