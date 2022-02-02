@@ -7,55 +7,53 @@ Write a function, has_cycle, that takes in an object representing the adjacency 
 import unittest
 
 
-# def has_cycle(graph):
-#     visited = set()
-#     for node in graph:
-#         stack = [node]
-#         visiting = set()
-#         while stack:
-#             current = stack.pop()
-
-#             if current in visiting:
-#                 return True
-#             if current in visited:
-#                 continue
-
-#             visiting.add(current)
-
-#             if not graph[current]:
-#                 visited = visited.union(visiting)
-#                 visiting = set()
-
-#             for neighbor in graph[current]:
-#                 stack.append(neighbor)
-
-#         visited = visited.union(visiting)
-#     return False
-
 def has_cycle(graph):
     visited = set()
-    for start_node in graph:
-        if cycle_detect(graph, start_node, set(), visited):
-            return True
+    for node in graph:
+        stack = [node]
+        visiting = set()
+        while stack:
+            current = stack.pop()
+
+            if current in visiting and current not in visited:
+                return True
+            if current in visited:
+                continue
+
+            visiting.add(current)
+
+            if not graph[current]:
+                visited = visited.union(visiting)
+
+            for neighbor in graph[current]:
+                stack.append(neighbor)
+
+        visited = visited.union(visiting)
     return False
 
+    # def has_cycle(graph):
+    #     visited = set()
+    #     for start_node in graph:
+    #         if cycle_detect(graph, start_node, set(), visited):
+    #             return True
+    #     return False
 
-def cycle_detect(graph, node, visiting, visited):
-    if node in visited:
-        return False
+    # def cycle_detect(graph, node, visiting, visited):
+    #     if node in visited:
+    #         return False
 
-    if node in visiting:
-        return True
+    #     if node in visiting:
+    #         return True
 
-    visiting.add(node)
+    #     visiting.add(node)
 
-    for neighbor in graph[node]:
-        if cycle_detect(graph, neighbor, visiting, visited):
-            return True
+    #     for neighbor in graph[node]:
+    #         if cycle_detect(graph, neighbor, visiting, visited):
+    #             return True
 
-    visiting.remove(node)
-    visited.add(node)
-    return False
+    #     visiting.remove(node)
+    #     visited.add(node)
+    #     return False
 
 
 class Test(unittest.TestCase):
