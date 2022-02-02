@@ -14,17 +14,22 @@ def has_cycle(graph):
         visiting = set()
         while stack:
             current = stack.pop()
+
             if current in visiting:
                 return True
+            if current in visited:
+                continue
 
             visiting.add(current)
 
-            if not graph[current] or current in visited:
+            if not graph[current]:
                 visited = visited.union(visiting)
-                break
+                visiting = set()
 
             for neighbor in graph[current]:
                 stack.append(neighbor)
+
+        visited = visited.union(visiting)
     return False
 
 
