@@ -25,9 +25,7 @@ def best_bridge(grid):
     stack = [start]
     while stack:
         r, c = stack.pop()
-        row_inbounds = 0 <= r < len(grid)
-        col_inbounds = 0 <= c < len(grid[0])
-        if not row_inbounds or not col_inbounds:
+        if not inbounds(grid, r, c):
             continue
         if grid[r][c] == "W":
             continue
@@ -41,31 +39,29 @@ def best_bridge(grid):
         stack.append((r, c - 1))
 
     # Use breath first search to find shortest path to other island
-    best_bridge = float("inf")
-    for cell in island:
-        stack = deque([(*cell, 0)])
-        visited = set().union(island)
-        while stack:
-            r, c, dist = stack.popleft()
-            if (r, c) not in visited and grid[r][c] == "L":
-                best_bridge = min(best_bridge, dist - 1)
-                break
 
-            visited.add((r, c))
+    queue = deque([])
+    visited = set(island)
+    for pos in island:
+        queue.append((*pos, 0))
 
-            for i, j in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                ri = r + i
-                cj = c + j
-                row_inbounds = 0 <= ri < len(grid)
-                col_inbounds = 0 <= cj < len(grid[0])
-                if not row_inbounds or not col_inbounds:
-                    continue
-                if (ri, cj) in visited:
-                    continue
+    while queue:
+        r, c, dist = queue.popleft()
+        if (r, c) not in island and grid[r][c] == "L":
+            return dist - 1
 
-                stack.append((ri, cj, dist + 1))
+        for i, j in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            new_r = r + i
+            new_c = c + j
+            if inbounds(grid, new_r, new_c) and (new_r, new_c) not in visited:
+                visited.add((new_r, new_c))
+                queue.append((new_r, new_c, dist + 1))
 
-    return best_bridge
+
+def inbounds(grid, row, col):
+    row_inbounds = 0 <= row < len(grid)
+    col_inbounds = 0 <= col < len(grid[0])
+    return row_inbounds and col_inbounds
 
 
 class Test(unittest.TestCase):
