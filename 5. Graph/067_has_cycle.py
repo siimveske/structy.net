@@ -20,7 +20,7 @@ def has_cycle(graph):
             visiting.add(current)
 
             if not graph[current] or current in visited:
-                visited.union(visiting)
+                visited = visited.union(visiting)
                 break
 
             for neighbor in graph[current]:
