@@ -7,7 +7,7 @@ Write a function, prereqs_possible, that takes in a number of courses (n) and pr
 import unittest
 
 
-def prereqs_possible(num_courses, prereqs):
+def prereqs_possible(num_courses: int, prereqs: tuple) -> bool:
     graph = build_graph(num_courses, prereqs)
     for node in graph:
         if _has_loop(graph, node, set(), set()):
@@ -15,7 +15,7 @@ def prereqs_possible(num_courses, prereqs):
     return True
 
 
-def _has_loop(graph, node, gray, black):
+def _has_loop(graph: dict, node: int, gray: set, black: set) -> bool:
     if node in gray:
         return True
     if node in black:
@@ -33,7 +33,7 @@ def _has_loop(graph, node, gray, black):
     return False
 
 
-def build_graph(num_courses, prereqs):
+def build_graph(num_courses: int, prereqs: tuple) -> dict:
     graph = {}
     for i in range(num_courses):
         graph[i] = []
