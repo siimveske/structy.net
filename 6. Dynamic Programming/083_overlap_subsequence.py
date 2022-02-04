@@ -17,15 +17,13 @@ def calculate(string_1, string_2, idx, memo):
     if idx1 >= len(string_1) or idx2 >= len(string_2):
         return 0
 
-    result = 0
     if string_1[idx1] == string_2[idx2]:
-        result += calculate(string_1, string_2, (idx1 + 1, idx2 + 1), memo) + 1
+        memo[idx] = calculate(string_1, string_2, (idx1 + 1, idx2 + 1), memo) + 1
     else:
         left = calculate(string_1, string_2, (idx1 + 1, idx2), memo)
         right = calculate(string_1, string_2, (idx1, idx2 + 1), memo)
-        result += max(left, right)
+        memo[idx] = max(left, right)
 
-    memo[idx] = result
     return memo[idx]
 
 
