@@ -8,19 +8,16 @@ import unittest
 
 
 def paired_parentheses(string):
-    stack = []
+    count = 0
     for character in string:
         if character == '(':
-            stack.append('(')
+            count += 1
         elif character == ')':
-            try:
-                last_item = stack.pop()
-                if last_item != '(':
-                    return False
-            except IndexError:
-                return False
+            count -= 1
+        if count < 0:
+            return False
 
-    return stack == []
+    return count == 0
 
 
 class Test(unittest.TestCase):
