@@ -1,25 +1,56 @@
 """
-paired parentheses
+--- Paired parentheses ---
 Write a function, paired_parentheses, that takes in a string as an argument. The function should return a boolean indicating whether or not the string has well-formed parentheses.
 
 You may assume the string contains only alphabetic characters, '(', or ')'.
-
-test_00:
-paired_parentheses("(david)((abby))") # -> True
-test_01:
-paired_parentheses("()rose(jeff") # -> False
-test_02:
-paired_parentheses(")(") # -> False
-test_03:
-paired_parentheses("()") # -> True
-test_04:
-paired_parentheses("(((potato())))") # -> True
-test_05:
-paired_parentheses("(())(water)()") # -> True
-test_06:
-paired_parentheses("(())(water()()") # -> False
-test_07:
-paired_parentheses("") # -> True
-test_08:
-pairedParentheses("))()") # False
 """
+import unittest
+
+
+def paired_parentheses(string):
+    stack = []
+    for character in string:
+        if character == '(':
+            stack.append('(')
+        elif character == ')':
+            try:
+                last_item = stack.pop()
+                if last_item != '(':
+                    return False
+            except IndexError:
+                return False
+
+    return stack == []
+
+
+class Test(unittest.TestCase):
+    def test_00(self):
+        assert paired_parentheses("(david)((abby))") == True
+
+    def test_01(self):
+        assert paired_parentheses("()rose(jeff") == False
+
+    def test_02(self):
+        assert paired_parentheses(")(") == False
+
+    def test_03(self):
+        assert paired_parentheses("()") == True
+
+    def test_04(self):
+        assert paired_parentheses("(((potato())))") == True
+
+    def test_05(self):
+        assert paired_parentheses("(())(water)()") == True
+
+    def test_06(self):
+        assert paired_parentheses("(())(water()()") == False
+
+    def test_07(self):
+        assert paired_parentheses("") == True
+
+    def test_08(self):
+        assert paired_parentheses("))()") == False
+
+
+if __name__ == "__main__":
+    unittest.main()
