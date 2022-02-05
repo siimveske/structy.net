@@ -5,24 +5,20 @@ Write a function, befitting_brackets, that takes in a string as an argument. The
 You may assume the string contains only characters: ( ) [ ] { }
 """
 
-
 import unittest
 
 
 def befitting_brackets(string):
     stack = []
-    brace_map = {
-        "(": ")", "[": "]", "{": "}"
-    }
+    brackets = {"(": ")", "[": "]", "{": "}"}
 
     for character in string:
-        if character in ["(", "[", "{"]:
+        if character in brackets:
             stack.append(character)
         else:
-            if not stack:
-                return False
-            last_item = stack.pop()
-            if brace_map[last_item] != character:
+            if stack and stack[-1] == character:
+                stack.pop()
+            else:
                 return False
 
     return stack == []
@@ -30,28 +26,28 @@ def befitting_brackets(string):
 
 class Test(unittest.TestCase):
     def test_00(self):
-        assert befitting_brackets('(){}[](())') == True
+        assert befitting_brackets("(){}[](())") == True
 
     def test_01(self):
-        assert befitting_brackets('({[]})') == True
+        assert befitting_brackets("({[]})") == True
 
     def test_02(self):
-        assert befitting_brackets('[][}') == False
+        assert befitting_brackets("[][}") == False
 
     def test_03(self):
-        assert befitting_brackets('{[]}({}') == False
+        assert befitting_brackets("{[]}({}") == False
 
     def test_04(self):
-        assert befitting_brackets('[]{}(}[]') == False
+        assert befitting_brackets("[]{}(}[]") == False
 
     def test_05(self):
-        assert befitting_brackets('[]{}()[]') == True
+        assert befitting_brackets("[]{}()[]") == True
 
     def test_06(self):
-        assert befitting_brackets(']{}') == False
+        assert befitting_brackets("]{}") == False
 
     def test_07(self):
-        assert befitting_brackets('') == True
+        assert befitting_brackets("") == True
 
     def test_08(self):
         assert befitting_brackets("{[(}])") == False
