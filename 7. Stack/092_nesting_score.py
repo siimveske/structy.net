@@ -17,10 +17,10 @@ def nesting_score(string):
             stack.append(0)
         else:
             top = stack.pop()
-            if top:
-                stack[-1] += top * 2
-            else:
+            if top == 0:
                 stack[-1] += 1
+            else:
+                stack[-1] += top * 2
     return stack.pop()
 
 
