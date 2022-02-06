@@ -25,29 +25,29 @@ def nesting_score(string):
 
 
 class Test(unittest.TestCase):
-    # def test_00(self):
-    #     assert nesting_score("[]") == 1
+    def test_00(self):
+        assert nesting_score("[]") == 1
 
-    # def test_01(self):
-    #     assert nesting_score("[][][]") == 3
+    def test_01(self):
+        assert nesting_score("[][][]") == 3
 
-    # def test_02(self):
-    #     assert nesting_score("[[]]") == 2
+    def test_02(self):
+        assert nesting_score("[[]]") == 2
 
-    # def test_03(self):
-    #     assert nesting_score("[[][]]") == 4
+    def test_03(self):
+        assert nesting_score("[[][]]") == 4
 
-    # def test_04(self):
-    #     assert nesting_score("[[][][]]") == 6
+    def test_04(self):
+        assert nesting_score("[[][][]]") == 6
 
-    # def test_05(self):
-    #     assert nesting_score("[[][]][]") == 5
+    def test_05(self):
+        assert nesting_score("[[][]][]") == 5
 
     def test_06(self):
         assert nesting_score("[][[][]][[]]") == 7
 
-    # def test_07(self):
-    #     assert nesting_score("[[[[[[[][]]]]]]][]") == 129
+    def test_07(self):
+        assert nesting_score("[[[[[[[][]]]]]]][]") == 129
 
 
 if __name__ == "__main__":
