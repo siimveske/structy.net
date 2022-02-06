@@ -22,8 +22,7 @@ def decompress_braces(string):
             while item.isalpha():
                 pattern = item + pattern
                 item = stack.pop()
-            qty = int(item)
-            stack.append(pattern * qty)
+            stack.append(pattern * int(item))
 
     return ''.join(stack)
 
