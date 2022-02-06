@@ -19,7 +19,7 @@ def decompress_braces(string):
         elif character == '}':
             pattern = ''
             item = stack.pop()
-            while not item.isdecimal():
+            while item.isalpha():
                 pattern = item + pattern
                 item = stack.pop()
             qty = int(item)
