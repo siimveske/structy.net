@@ -14,8 +14,8 @@ import unittest
 def decompress_braces(string):
     stack = []
     for character in string:
-        if character == '{':
-            continue
+        if character.isalnum():
+            stack.append(character)
         elif character == '}':
             pattern = ''
             item = stack.pop()
@@ -24,8 +24,6 @@ def decompress_braces(string):
                 item = stack.pop()
             qty = int(item)
             stack.append(pattern * qty)
-        else:
-            stack.append(character)
 
     return ''.join(stack)
 
