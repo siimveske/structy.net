@@ -23,20 +23,31 @@ import unittest
 #     return without_first + with_first
 
 
+# def subsets(elements):
+#     """A is an iterable (list, tuple, set, str, etc)
+#     returns a set which is the power set of A.
+#     url: https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset
+#     """
+#     length = len(elements)
+#     powerset = []
+
+#     for i in range(2 ** length):
+#         selector = f'{i:0{length}b}'
+#         subset = [elements[j] for j, bit in enumerate(selector) if bit == '1']
+#         powerset.append(subset)
+
+#     return powerset
+
 def subsets(elements):
-    """A is an iterable (list, tuple, set, str, etc)
-    returns a set which is the power set of A.
-    url: https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset
-    """
-    length = len(elements)
-    powerset = []
 
-    for i in range(2 ** length):
-        selector = f'{i:0{length}b}'
-        subset = [elements[j] for j, bit in enumerate(selector) if bit == '1']
-        powerset.append(subset)
-
-    return powerset
+    result = [[]]
+    for char in elements:
+        tmp = []
+        for subset in result:
+            tmp.append(subset)
+            tmp.append(subset + [char])
+        result = tmp
+    return result
 
 
 class Test(unittest.TestCase):
