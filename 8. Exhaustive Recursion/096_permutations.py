@@ -25,6 +25,17 @@ def permutations(items):
     return result
 
 
+# def permutations(items):
+#     result = [[]]
+#     for item in items:
+#         perms = []
+#         for perm in result:
+#             for i in range(len(perm) + 1):
+#                 perms.append(perm[:i] + [item] + perm[i:])
+#         result = perms
+#     return result
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         assert permutations(['a', 'b', 'c']) == [
