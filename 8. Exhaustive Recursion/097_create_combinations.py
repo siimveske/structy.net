@@ -9,16 +9,32 @@ You may assume that the input list contains unique elements and 1 <= k <= len(it
 import unittest
 
 
-def create_combinations(items, k):
-    combinations = [[]]
-    for item in items:
-        tmp = []
-        for subset in combinations:
-            tmp.append(subset)
-            tmp.append(subset + [item])
-        combinations = tmp
+# def create_combinations(items, k):
+#     combinations = [[]]
+#     for item in items:
+#         tmp = []
+#         for subset in combinations:
+#             tmp.append(subset)
+#             tmp.append(subset + [item])
+#         combinations = tmp
 
-    result = [i for i in combinations if len(i) == k]
+#     result = [i for i in combinations if len(i) == k]
+#     return result
+
+def create_combinations(items, k):
+    if k == 0:
+        return [[]]
+    if k > len(items):
+        return []
+
+    first = items[0]
+    rest = items[1:]
+
+    with_first = create_combinations(rest, k - 1)
+    with_first = [[first] + i for i in with_first]
+    without_first = create_combinations(rest, k)
+
+    result = with_first + without_first
     return result
 
 
