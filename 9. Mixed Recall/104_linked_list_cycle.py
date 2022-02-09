@@ -5,23 +5,36 @@ Write a function, linked_list_cycle, that takes in the head of a linked list as 
 import unittest
 
 
-def linked_list_cycle(head):
-    visited = set()
-    current = head
-
-    while current:
-        if current in visited:
-            return True
-        visited.add(current)
-        current = current.next
-
-    return False
-
-
 class Node:
     def __init__(self, val):
         self.val = val
         self.next = None
+
+# def linked_list_cycle(head):
+#     visited = set()
+#     current = head
+
+#     while current:
+#         if current in visited:
+#             return True
+#         visited.add(current)
+#         current = current.next
+
+#     return False
+
+
+def linked_list_cycle(head: Node):
+
+    slow = head
+    fast = head
+
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+        if slow is fast:
+            return True
+
+    return False
 
 
 class Test(unittest.TestCase):
@@ -101,6 +114,11 @@ class Test(unittest.TestCase):
 
     def test_05(self):
         assert linked_list_cycle(None) == False
+
+    def test_06(self):
+        p = Node('p')
+        p.next = p
+        assert linked_list_cycle(p) == True
 
 
 if __name__ == "__main__":
