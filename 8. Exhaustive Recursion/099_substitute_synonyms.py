@@ -8,11 +8,9 @@ import unittest
 
 
 def substitute_synonyms(sentence, synonyms):
-    result = []
     sentence = sentence.split()
     raw_result = _substitute_synonyms(sentence, synonyms)
-    for i in raw_result:
-        result.append(' '.join(i))
+    result = [' '.join(i) for i in raw_result]
 
     return result
 
@@ -23,12 +21,14 @@ def _substitute_synonyms(sentence, synonyms):
 
     result = []
     current = sentence[0]
+    subarrays = _substitute_synonyms(sentence[1:], synonyms)
+
     if current in synonyms:
         for synonym in synonyms[current]:
-            for suffix in _substitute_synonyms(sentence[1:], synonyms):
+            for suffix in subarrays:
                 result.append([synonym] + suffix)
     else:
-        for suffix in _substitute_synonyms(sentence[1:], synonyms):
+        for suffix in subarrays:
             result.append([current] + suffix)
 
     return result
