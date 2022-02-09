@@ -14,14 +14,14 @@ class Node:
 
 
 def middle_value(head: Node):
-    values = []
-    current = head
-    while current:
-        values.append(current.val)
-        current = current.next
+    slow = head
+    fast = head
 
-    idx = len(values) // 2
-    return values[idx]
+    while fast is not None and fast.next is not None:
+        fast = fast.next.next
+        slow = slow.next
+
+    return slow.val
 
 
 class Test(unittest.TestCase):
