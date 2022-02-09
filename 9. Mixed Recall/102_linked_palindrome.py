@@ -12,23 +12,15 @@ class Node:
 
 
 def linked_palindrome(head: Node):
-    if not head:
-        return True
-
-    stack = [head]
-    current = head
-    while current.next:
-        current = current.next
-        stack.append(current)
+    values = []
 
     current = head
-    while stack:
-        tail = stack.pop()
-        if current.val != tail.val:
-            return False
+    while current:
+        values.append(current.val)
         current = current.next
 
-    return True
+    reversed = values[::-1]
+    return values == reversed
 
 
 class Test(unittest.TestCase):
