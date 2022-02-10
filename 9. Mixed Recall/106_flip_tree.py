@@ -16,14 +16,9 @@ def flip_tree(root: Node):
     if not root:
         return None
 
-    left = root.left
-    right = root.right
-
-    root.left = right
-    root.right = left
-
-    flip_tree(root.left)
-    flip_tree(root.right)
+    left = flip_tree(root.left)
+    right = flip_tree(root.right)
+    root.left, root.right = right, left
 
     return root
 
