@@ -23,6 +23,44 @@ def flip_tree(root: Node):
     return root
 
 
+def copy_tree(root):
+    result = Node(root.val)
+    stack1 = [root]
+    stack2 = [result]
+    while stack1:
+        t1 = stack1.pop()
+        t2 = stack2.pop()
+        if t1.left:
+            t2.left = Node(t1.left.val)
+            stack1.append(t1.left)
+            stack2.append(t2.left)
+        if t1.right:
+            t2.right = Node(t1.right.val)
+            stack1.append(t1.right)
+            stack2.append(t2.right)
+    return result
+
+
+def are_flipped(root1: Node, root2: Node):
+    stack1 = [root1]
+    stack2 = [root2]
+    while stack1:
+        node1 = stack1.pop()
+        node2 = stack2.pop()
+
+        if node1.val != node2.val:
+            return False
+
+        if node1.left:
+            stack1.append(node1.left)
+            stack2.append(node2.right)
+        if node1.right:
+            stack1.append(node1.right)
+            stack2.append(node2.left)
+
+    return True
+
+
 class Test(unittest.TestCase):
     def test_00(self):
         a = Node("a")
@@ -50,7 +88,8 @@ class Test(unittest.TestCase):
         #    / \
         #    g  h
 
-        assert flip_tree(a)
+        clone = copy_tree(a)
+        flip_tree(a)
 
         #       a
         #    /    \
@@ -59,6 +98,7 @@ class Test(unittest.TestCase):
         # f     e    d
         #     /  \
         #    h    g
+        assert are_flipped(a, clone)
 
     def test_01(self):
         u = Node("u")
@@ -82,6 +122,7 @@ class Test(unittest.TestCase):
         #        / \
         #        q  p
 
+        clone = copy_tree(u)
         assert flip_tree(u)
 
         #           u
@@ -91,6 +132,7 @@ class Test(unittest.TestCase):
         #     r
         #    / \
         #   p  q
+        assert are_flipped(u, clone)
 
     def test_02(self):
         l = Node("l")
@@ -120,6 +162,7 @@ class Test(unittest.TestCase):
         #        / \   / \
         #       q   r s   t
 
+        clone = copy_tree(l)
         assert flip_tree(l)
 
         #             l
@@ -129,6 +172,7 @@ class Test(unittest.TestCase):
         #    p     o
         #  / \    / \
         # t   s  r   q
+        assert are_flipped(l, clone)
 
     def test_03(self):
         n = Node("n")
@@ -142,11 +186,13 @@ class Test(unittest.TestCase):
         #     /   \
         #    y     c
 
+        clone = copy_tree(n)
         assert flip_tree(n)
 
         #       n
         #     /   \
         #    c     y
+        assert are_flipped(n, clone)
 
 
 if __name__ == "__main__":
