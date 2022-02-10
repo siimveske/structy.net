@@ -4,7 +4,6 @@ Write a function, lefty_nodes, that takes in the root of a binary tree. The func
 """
 import unittest
 from collections import deque
-from collections import defaultdict
 
 
 class Node:
@@ -18,19 +17,19 @@ def lefty_nodes(root: Node):
     if not root:
         return []
 
-    tree = defaultdict(list)
+    result = []
     queue = deque([(root, 0)])
 
     while queue:
         node, level = queue.popleft()
-        tree[level].append(node.val)
+
+        if len(result) == level:
+            result.append(node.val)
 
         if node.left:
             queue.append((node.left, level + 1))
         if node.right:
             queue.append((node.right, level + 1))
-
-    result = [level[0] for level in tree.values()]
 
     return result
 
