@@ -15,12 +15,12 @@ def binary_search(numbers, target):
 
     while low <= high:
         mid = (low + high) // 2
-        if numbers[mid] == target:
-            return mid
         if target < numbers[mid]:
             high = mid - 1
-        else:
+        elif target > numbers[mid]:
             low = mid + 1
+        else:
+            return mid
 
     return -1
 
