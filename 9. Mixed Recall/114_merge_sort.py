@@ -6,7 +6,18 @@ import unittest
 
 
 def merge_sort(nums):
-    pass
+    if len(nums) == 1:
+        return nums
+
+    midpoint = len(nums) // 2
+    left = nums[:midpoint]
+    right = nums[midpoint:]
+
+    sorted_left = merge_sort(left)
+    sorted_right = merge_sort(right)
+
+    result = combine(sorted_left, sorted_right)
+    return result
 
 
 def combine(list1, list2):
@@ -39,6 +50,7 @@ def combine(list1, list2):
 
 
 class Test(unittest.TestCase):
+
     def test_00(self):
         numbers = [10, 4, 42, 5, 8, 100, 5, 6, 12, 40]
         assert merge_sort(numbers) == [4, 5, 5, 6, 8, 10, 12, 40, 42, 100]
