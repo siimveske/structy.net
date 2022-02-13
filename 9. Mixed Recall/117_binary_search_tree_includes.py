@@ -5,8 +5,29 @@ Write a function, binary_search_tree_includes, that takes in the root of a binar
 A Binary Search Tree is a binary tree where all values within a node's left subtree are smaller than the node's value and all values in a node's right subtree are greater than or equal to the node's value.
 
 Your solution should have a best case runtime of O(log(n)).
+"""
+import unittest
 
-tree a
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def binary_search_tree_includes(root, target):
+    if not root:
+        return False
+    if root.val == target:
+        return True
+    if target < root.val:
+        return binary_search_tree_includes(root.left, target)
+    else:
+        return binary_search_tree_includes(root.right, target)
+
+
+# tree a
 a = Node(12)
 b = Node(5)
 c = Node(18)
@@ -25,15 +46,8 @@ c.right = f
 #   5     18
 #  / \     \
 # 3   9     19
-test_00:
-binary_search_tree_includes(a, 9) # -> True
-test_01:
-binary_search_tree_includes(a, 15) # -> False
-test_02:
-binary_search_tree_includes(a, 1) # -> False
-test_03:
-binary_search_tree_includes(a, 12) # -> True
-tree q
+
+# tree q
 q = Node(54)
 r = Node(42)
 s = Node(70)
@@ -58,14 +72,36 @@ v.right = x
 # 31   50     72
 #     /        \
 #    47         90
-test_04:
-binary_search_tree_includes(q, 55) # -> False
-test_05:
-binary_search_tree_includes(q, 47) # -> True
-test_06:
-binary_search_tree_includes(q, 49) # -> False
-test_07:
-binary_search_tree_includes(q, 70) # -> True
-test_08:
-binary_search_tree_includes(q, 100) # -> False
-"""
+
+
+class Test(unittest.TestCase):
+    def test_00(self):
+        assert binary_search_tree_includes(a, 9) == True
+
+    def test_01(self):
+        assert binary_search_tree_includes(a, 15) == False
+
+    def test_02(self):
+        assert binary_search_tree_includes(a, 1) == False
+
+    def test_03(self):
+        assert binary_search_tree_includes(a, 12) == True
+
+    def test_04(self):
+        assert binary_search_tree_includes(q, 55) == False
+
+    def test_05(self):
+        assert binary_search_tree_includes(q, 47) == True
+
+    def test_06(self):
+        assert binary_search_tree_includes(q, 49) == False
+
+    def test_07(self):
+        assert binary_search_tree_includes(q, 70) == True
+
+    def test_08(self):
+        assert binary_search_tree_includes(q, 100) == False
+
+
+if __name__ == "__main__":
+    unittest.main()
