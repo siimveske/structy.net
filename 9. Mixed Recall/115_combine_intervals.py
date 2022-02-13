@@ -26,13 +26,10 @@ def combine_intervals(intervals):
     for idx in range(1, len(sorted_intervals)):
         last_start, last_end = result[-1]
         current_start, current_end = sorted_intervals[idx]
-        if current_start >= last_start and current_end <= last_end:
-            continue
-        if current_start >= last_start and current_start <= last_end:
-            result.pop()
-            result.append((last_start, current_end))
-            continue
-        if current_start > last_end:
+        if current_start <= last_end:
+            if current_end > last_end:
+                result[-1] = (last_start, current_end)
+        else:
             result.append((current_start, current_end))
 
     return result
