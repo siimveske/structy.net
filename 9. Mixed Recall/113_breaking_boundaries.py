@@ -31,19 +31,18 @@ def explore(m, n, k, r, c, memo):
     if key in memo:
         return memo[key]
 
-    if k < 0:
+    row_inbounds = 0 <= r < m
+    col_inbounds = 0 <= c < n
+    if not row_inbounds or not col_inbounds:
+        return 1
+
+    if k == 0:
         return 0
-    if r < 0 or r >= m:
-        return 1
-    if c < 0 or c >= n:
-        return 1
 
-    k -= 1
-
-    left = explore(m, n, k, r, c - 1, memo)
-    right = explore(m, n, k, r, c + 1, memo)
-    up = explore(m, n, k, r - 1, c, memo)
-    down = explore(m, n, k, r + 1, c, memo)
+    left = explore(m, n, k - 1, r, c - 1, memo)
+    right = explore(m, n, k - 1, r, c + 1, memo)
+    up = explore(m, n, k - 1, r - 1, c, memo)
+    down = explore(m, n, k - 1, r + 1, c, memo)
 
     memo[key] = sum([left, right, up, down])
     return memo[key]
