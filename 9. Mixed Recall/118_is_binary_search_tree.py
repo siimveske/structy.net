@@ -15,24 +15,21 @@ class Node:
 
 
 def is_binary_search_tree(root: Node):
-    result = explore(root)
-    for i in range(len(result) - 1):
-        if result[i] > result[i + 1]:
+    values = []
+    in_order_traversal(root, values)
+    for i in range(len(values) - 1):
+        if values[i] > values[i + 1]:
             return False
     return True
 
 
-def explore(root: Node):
-
+def in_order_traversal(root: Node, values):
     if not root:
-        return []
+        return
 
-    result = []
-    result += explore(root.left)
-    result.append(root.val)
-    result += explore(root.right)
-
-    return result
+    in_order_traversal(root.left, values)
+    values.append(root.val)
+    in_order_traversal(root.right, values)
 
 
 class Test(unittest.TestCase):
