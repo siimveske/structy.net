@@ -21,8 +21,12 @@ def detect_dictionary(dictionary, alphabet):
         for char_idx, char1 in enumerate(current_word):
             try:
                 char2 = next_word[char_idx]
+                if mapping[char1] == mapping[char2]:
+                    continue
                 if mapping[char1] > mapping[char2]:
                     return False
+                if mapping[char1] < mapping[char2]:
+                    break
             except IndexError:
                 return False
 
@@ -33,32 +37,32 @@ class Test(unittest.TestCase):
     def test_00(self):
         dictionary = ["zoo", "tick", "tack", "door"]
         alphabet = "ghzstijbacdopnfklmeqrxyuvw"
-        detect_dictionary(dictionary, alphabet) == True
+        assert detect_dictionary(dictionary, alphabet) == True
 
     def test_01(self):
         dictionary = ["zoo", "tack", "tick", "door"]
         alphabet = "ghzstijbacdopnfklmeqrxyuvw"
-        detect_dictionary(dictionary, alphabet) == False
+        assert detect_dictionary(dictionary, alphabet) == False
 
     def test_02(self):
         dictionary = ["zoos", "zoo", "tick", "tack", "door"]
         alphabet = "ghzstijbacdopnfklmeqrxyuvw"
-        detect_dictionary(dictionary, alphabet) == False
+        assert detect_dictionary(dictionary, alphabet) == False
 
     def test_03(self):
         dictionary = ["miles", "milestone", "proper", "process", "goal"]
         alphabet = "mnoijpqrshkltabcdefguvwzxy"
-        detect_dictionary(dictionary, alphabet) == True
+        assert detect_dictionary(dictionary, alphabet) == True
 
     def test_04(self):
         dictionary = ["miles", "milestone", "pint", "proper", "process", "goal"]
         alphabet = "mnoijpqrshkltabcdefguvwzxy"
-        detect_dictionary(dictionary, alphabet) == True
+        assert detect_dictionary(dictionary, alphabet) == True
 
     def test_05(self):
         dictionary = ["miles", "milestone", "pint", "proper", "process", "goal", "apple"]
         alphabet = "mnoijpqrshkltabcdefguvwzxy"
-        detect_dictionary(dictionary, alphabet) == False
+        assert detect_dictionary(dictionary, alphabet) == False
 
 
 if __name__ == "__main__":
