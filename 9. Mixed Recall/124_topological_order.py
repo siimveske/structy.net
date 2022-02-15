@@ -8,33 +8,28 @@ import unittest
 
 
 def topological_order(graph):
-    parent_counter = {}
-    for parent in graph:
-        parent_counter[parent] = 0
+    num_parents = {}
+    for node in graph:
+        num_parents[node] = 0
 
-    for children in graph.values():
-        for child in children:
-            parent_counter[child] += 1
+    for node in graph:
+        for child in graph[node]:
+            num_parents[child] += 1
 
     ready = []
-    for parent, count in parent_counter.items():
+    for parent, count in num_parents.items():
         if count == 0:
             ready.append(parent)
             break
 
     solution = []
-    visited = set()
     while ready:
         current_item = ready.pop()
-        if current_item in visited:
-            continue
-
-        visited.add(current_item)
         solution.append(current_item)
 
         for child in graph[current_item]:
-            parent_counter[child] -= 1
-            if parent_counter[child] == 0:
+            num_parents[child] -= 1
+            if num_parents[child] == 0:
                 ready.append(child)
 
     return solution
