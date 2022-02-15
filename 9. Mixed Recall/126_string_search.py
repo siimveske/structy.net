@@ -10,12 +10,12 @@ import unittest
 def string_search(grid, s):
     for row in range(len(grid)):
         for col in range(len(grid[0])):
-            if dfs(grid, s, 0, row, col, set()):
+            if dfs(grid, s, 0, row, col):
                 return True
     return False
 
 
-def dfs(grid, s, idx, row, col, visited):
+def dfs(grid, s, idx, row, col):
     if idx == len(s):
         return True
 
@@ -27,8 +27,8 @@ def dfs(grid, s, idx, row, col, visited):
     if grid[row][col] != s[idx]:
         return False
 
-    key = (row, col)
-    visited.add(key)
+    character = grid[row][col]
+    grid[row][col] = '*'  # instead of memo dict mark location as visited and restore it later
 
     up = (row + 1, col)
     down = (row - 1, col)
@@ -36,12 +36,12 @@ def dfs(grid, s, idx, row, col, visited):
     right = (row, col + 1)
     directions = [up, down, left, right]
     for new_row, new_col in directions:
-        if (new_row, new_col) in visited:
-            continue
-        if dfs(grid, s, idx + 1, new_row, new_col, visited):
-            return True
+        result = dfs(grid, s, idx + 1, new_row, new_col)
+        if result:
+            break
 
-    return False
+    grid[row][col] = character
+    return result
 
 
 class Test(unittest.TestCase):
