@@ -15,12 +15,12 @@ def detect_dictionary(dictionary, alphabet):
         mapping[letter] = letter_idx
 
     for word_idx in range(len(dictionary) - 1):
-        word1 = dictionary[word_idx]
-        word2 = dictionary[word_idx + 1]
+        current_word = dictionary[word_idx]
+        next_word = dictionary[word_idx + 1]
 
-        for char_idx, char1 in enumerate(word1):
+        for char_idx, char1 in enumerate(current_word):
             try:
-                char2 = word2[char_idx]
+                char2 = next_word[char_idx]
                 if mapping[char1] > mapping[char2]:
                     return False
             except IndexError:
