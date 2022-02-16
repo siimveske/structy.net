@@ -10,6 +10,10 @@ import unittest
 
 
 def token_transform(s, tokens):
+    return _token_transform(s, tokens, {})
+
+
+def _token_transform(s, tokens, memo):
     result = []
     i = 0
     j = 1
@@ -19,7 +23,11 @@ def token_transform(s, tokens):
             while s[j] != '$':
                 j += 1
             key = s[i:j + 1]
-            value = token_transform(tokens[key], tokens)
+            if key in memo:
+                value = memo[key]
+            else:
+                value = _token_transform(tokens[key], tokens, memo)
+                memo[key] = value
             result.append(value)
             i = j + 1
             j = i + 1
