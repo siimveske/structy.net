@@ -1,9 +1,0 @@
-{
-  "python.linting.pycodestyleEnabled": true,
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": false,
-  "python.formatting.yapfArgs": [
-    "--style",
-    "{based_on_style: pep8}"
-  ],
-}
